@@ -232,8 +232,19 @@ public class LinkedListDemo {
 	 * @return head 头节点
 	 */
 	public static Node reverse(Node head) {
-
-		return head;
+		Node preNode = head;
+		Node curNode = preNode.next;
+		Node postNode = curNode.next;
+		preNode.next = null;
+		while(curNode != null) {
+			curNode.next = preNode;
+			preNode = curNode;
+			curNode = postNode;
+			if(postNode == null) 
+				break;
+			postNode = postNode.next;
+		}
+		return preNode;
 	}
 
 	/**
@@ -243,7 +254,10 @@ public class LinkedListDemo {
 	 *            头节点
 	 */
 	public static void printReversely(Node head) {
-
+		if(head != null) {
+			printReversely(head.next);
+			System.out.println("data" + " = " + head.data);
+		}
 	}
 
 	/**

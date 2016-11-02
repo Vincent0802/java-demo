@@ -20,13 +20,13 @@ public class LinkedListMainApp {
 			head = LinkedListDemo.addNode(head, arr[i]);
 		}
 		System.out.println("操作前：");
-		LinkedListDemo.printList(head);
+		LinkedListDemo.printReversely(head);
 
 		// demo.deleteNode(head, 2);
 		// demo.insert(head, 100, 4);
-		LinkedListDemo.orderList(head);
+		Node newHead = LinkedListDemo.reverse(head);
 		System.out.println("操作后：");
-		LinkedListDemo.printList(head);
+		LinkedListDemo.printList(newHead);
 	}
 
 }
