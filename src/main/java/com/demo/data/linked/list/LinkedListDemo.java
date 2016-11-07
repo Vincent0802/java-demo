@@ -324,7 +324,13 @@ public class LinkedListDemo {
 	 * @return true or false
 	 */
 	public static boolean isIntersect(Node p, Node q) {
-		
-		return true;
+		Node tail1 = p;
+		while (tail1.next != null)
+			tail1 = tail1.next;
+
+		Node tail2 = q;
+		while (tail2.next != null)
+			tail2 = tail2.next;
+		return tail1 == tail2;
 	}
 }
