@@ -1,6 +1,7 @@
 package com.demo.test;
 
-import com.demo.data.utils.OutUtils;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @Description 测试用例主函数入口
@@ -11,32 +12,67 @@ import com.demo.data.utils.OutUtils;
  *
  */
 
+class DataObject implements Serializable {
+	private static int i = 0;
+	private String word = " ";
+
+	public void setWord(String word) {
+		this.word = word;
+	}
+
+	public void setI(int i) {
+		DataObject.i = i;
+	}
+	
+	public void print() {
+		System.out.println( "i = " + this.i + ", word = " + this.word);
+	}
+}
+
 public class Test {
 
-	public int countBitDiff1(int m, int n) {
-		int count = 0;
-		while (m > 0 && n > 0) {
-			if (((m & 1) == 1) && ((n & 1) == 1)) {
-				m >>= 1;
-				n >>= 1;
-			} else {
-				count++;
+	private static void test(int[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			try {
+				if (arr[i] % 2 == 0) {
+					throw new NullPointerException();
+				} else {
+					System.out.print(i);
+				}
+			} finally {
+				System.out.print("e");
 			}
 		}
-		return count;
 	}
 
-	public int countBitDiff(int m, int n) {
-		int dif = m ^ n;// 先将二者做异或运算，得到结果；
-		int cnt = 0;
-		while (dif != 0) {
-			dif = dif & (dif - 1);
-			cnt++;
-		} // 统计一个整数dif含有多少个1；
-		return cnt;
+	public int solution(int[] A) {
+		// write your code in Java SE 8
+		int n = A.length;
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		int i = 0;
+		int temp = 0;
+		int max = 0;
+		while (i < n && i >= 0) {
+			temp = A[i];
+			while (temp != A[i] || A[temp] != i) {
+				i = temp;
+				temp = A[i];
+			}
+			if (Math.abs(i - temp) > max)
+				max = Math.abs(i - temp);
+			i++;
+		}
+		return max;
 	}
 
-	public static void main(String args[]) {
-		OutUtils.print(new Test().countBitDiff(1999, 2299) + "");
+	public static void main(String[] args) {
+		/*Test t = new Test();
+		int[] A = { 2, 3, 1, 1, 3 };
+		int a = t.solution(A);
+		System.out.println("a = " + a);*/
+		DataObject object = new DataObject();
+		object.setWord("123");
+		object.setI(2);
+		object.print();
 	}
 }

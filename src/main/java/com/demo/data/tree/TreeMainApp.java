@@ -20,5 +20,6 @@ public class TreeMainApp {
 		Node root = null;
 		root = tree.buildBinaryTree(arr);
 		tree.preOrder(root);
+		System.out.print("))");
 	}
 }

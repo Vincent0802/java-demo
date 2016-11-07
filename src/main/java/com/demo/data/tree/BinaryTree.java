@@ -106,8 +106,19 @@ public class BinaryTree {
 	 */
 	public void preOrder(Node root) {
 		if (root != null) {
-			System.out.println(root.data);
+			System.out.print("(");
+			if(root.left == null) {
+				System.out.print(root.data + ", None");
+			} else {
+				System.out.print(root.data + ", ");
+			}
 			preOrder(root.left);
+			if(root.right == null) {
+				System.out.print(", None)");
+			} else {
+				System.out.print(", ");
+			}
+//			System.out.print(")");
 			preOrder(root.right);
 		}
 	}
