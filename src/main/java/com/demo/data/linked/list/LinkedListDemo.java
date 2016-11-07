@@ -200,14 +200,25 @@ public class LinkedListDemo {
 	}
 
 	/**
-	 * 删除重复元素
+	 * 删除重复元素,双重循环
 	 * 
 	 * @param head
 	 *            头节点
 	 * @return head 头节点
 	 */
 	public static Node deleteDuplecate(Node head) {
-
+		Node p = head;
+		while (p != null) {
+			Node q = p;
+			while (q.next != null) {
+				if (p.data == q.next.data) {
+					q.next = q.next.next;
+				} else {
+					q = q.next;
+				}
+			}
+			p = p.next;
+		}
 		return head;
 	}
 
@@ -218,10 +229,20 @@ public class LinkedListDemo {
 	 *            头节点
 	 * @return 所求节点
 	 */
-	public static Node findElement(Node head) {
-		Node target = null;
-
-		return target;
+	public static Node findElement(Node head, int k) {
+		if (k < 1 || k > length(head)) {
+			return null;
+		}
+		Node p1 = head;
+		Node p2 = head;
+		for (int i = 0; i < k; i++) {
+			p1 = p1.next;
+		}
+		while (p1 != null) {
+			p1 = p1.next;
+			p2 = p2.next;
+		}
+		return p2;
 	}
 
 	/**
@@ -236,11 +257,11 @@ public class LinkedListDemo {
 		Node curNode = preNode.next;
 		Node postNode = curNode.next;
 		preNode.next = null;
-		while(curNode != null) {
+		while (curNode != null) {
 			curNode.next = preNode;
 			preNode = curNode;
 			curNode = postNode;
-			if(postNode == null) 
+			if (postNode == null)
 				break;
 			postNode = postNode.next;
 		}
@@ -254,45 +275,55 @@ public class LinkedListDemo {
 	 *            头节点
 	 */
 	public static void printReversely(Node head) {
-		if(head != null) {
+		if (head != null) {
 			printReversely(head.next);
 			System.out.println("data" + " = " + head.data);
 		}
 	}
 
 	/**
-	 * 找出单链表中间节点
+	 * 找出单链表中间节点,快慢指针，快走两步，慢走一步，
 	 * 
 	 * @param head
 	 *            头节点
 	 * @return 所求节点
 	 */
 	public static Node findMiddle(Node head) {
-		Node target = null;
-
-		return target;
+		Node p = head;
+		Node q = head;
+		while (p != null && p.next != null && p.next.next != null) {
+			p = p.next.next;
+			q = q.next;
+		}
+		return q;
 	}
 
 	/**
-	 * 不知头节点的情况下删除指定节点删除重复元素
+	 * 不知头节点的情况下删除指定节点(若为链尾节点则无法删除，无法设置前驱节点next为null)
 	 * 
 	 * @param head
 	 *            头节点
 	 * @return head 头节点
 	 */
-	public static Node deleteUnknownHead(Node head) {
-
-		return head;
+	public static boolean deleteUnknownHead(Node target) {
+		if (target == null || target.next == null) {
+			return false;
+		}
+		int tmp = target.data;
+		target.data = target.next.data;
+		target.next.data = tmp;// 交换后面的data，并抛弃next
+		target.next = target.next.next;
+		return true;
 	}
-	
+
 	/**
-	 * 判断两个链表是否相交
+	 * 判断两个链表是否相交(判断尾节点是否相同)
 	 * 
 	 * @param head
 	 *            头节点
 	 * @return true or false
 	 */
-	public static boolean isIntersect(Node head) {
+	public static boolean isIntersect(Node p, Node q) {
 		
 		return true;
 	}

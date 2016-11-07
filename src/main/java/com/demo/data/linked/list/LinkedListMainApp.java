@@ -19,14 +19,16 @@ public class LinkedListMainApp {
 		for (int i = 0; i < 5; i++) {
 			head = LinkedListDemo.addNode(head, arr[i]);
 		}
-		System.out.println("操作前：");
-		LinkedListDemo.printReversely(head);
+		LinkedListDemo.printList(head);
+//		System.out.println("操作前：");
+//		LinkedListDemo.printReversely(head);
 
 		// demo.deleteNode(head, 2);
 		// demo.insert(head, 100, 4);
-		Node newHead = LinkedListDemo.reverse(head);
+		Node newHead = LinkedListDemo.findMiddle(head);
 		System.out.println("操作后：");
-		LinkedListDemo.printList(newHead);
+		System.out.println(newHead.data);
+//		LinkedListDemo.printList(newHead);
 	}
 
 }

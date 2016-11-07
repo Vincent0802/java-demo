@@ -15,11 +15,11 @@ import com.demo.data.utils.OutUtils;
 public class ArrayMainApp {
 
 	public static void main(String[] args) {
-		OutUtils.out();
+//		OutUtils.out();
 		// int arr[] = { 3, 1, 5, 6, 0 };
-		int arr[] = { 10, 12, 5, 11, 3 };
-		System.out.println("排序前：");
-		ArrayDemo.printArray(arr);
+		int arr[] = { 10, -12, -5, -1, 3 };
+//		System.out.println("排序前：");
+//		ArrayDemo.printArray(arr);
 
 		// BubbleSort.arrayBubbleSort(arr);
 		// HeapSort.heapSort(arr);
@@ -27,9 +27,9 @@ public class ArrayMainApp {
 		// MergeSort.mergeSort(arr, 0, arr.length - 1);
 		// QuickSort.quickSort(arr);
 		// SelectSort.selectSort(arr);
-		ShellSort.shellSort(arr);
-		System.out.println("排序后：");
-		ArrayDemo.printArray(arr);
+//		ShellSort.shellSort(arr);
+//		System.out.println("排序后：");
+		ArrayDemo.printArray(ArrayDemo.shiftK(arr, 2));
 	}
 
 }

@@ -35,8 +35,21 @@ public class Solution {
 		return cnt;
 	}
 
+	public int countBit(int m, int n) {
+		int cnt = 0;
+		while (n >= m) {
+			int dif = n;
+			while (dif != 0) {
+				dif = dif & (dif - 1);
+				cnt++;
+			}
+			n--;
+		}
+		return cnt;
+	}
+
 	public static void main(String args[]) {
-		OutUtils.print(new Solution().countBitDiff(1999, 2299) + "");
+		OutUtils.print(new Solution().countBit(1, 128) + "");
 	}
 
 }

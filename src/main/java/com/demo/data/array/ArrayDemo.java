@@ -30,44 +30,60 @@ public class ArrayDemo {
 	 * 
 	 * @param arr
 	 */
-	public static void findSecondMax(int arr[]) {
-
+	public static int findSecondMax(int arr[]) {
+		int max = 0;
+		int sec_max = 0;
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] > max) {
+				sec_max = max;
+				max = arr[i];
+			} else {
+				if (arr[i] > sec_max) {
+					sec_max = arr[i];
+				}
+			}
+		}
+		return sec_max;
 	}
 
 	/**
-	 * 求最大子数组的和（动态规划），并记录最大子数组的位置
+	 * 求最大子数组的和（动态规划）
 	 * 
 	 * @param arr
 	 */
 	public static int maxSubArray(int arr[]) {
-
-		return 1;
+		int n = arr.length;
+		int nAll = arr[0];// 有n个数字数组的最大子数组的和
+		int nEnd = arr[0];// 有n个数字数组包含最后一个元素的子数组的最大和
+		for (int i = 1; i < n; i++) {
+			nEnd = max(nEnd + arr[i], arr[i]);
+			nAll = max(nEnd, nAll);
+		}
+		return nAll;
 	}
 
 	/**
-	 * @Description: begin :子数组的开始位置
+	 * 求最小子数组的和（动态规划）
+	 * 
+	 * @param arr
 	 */
-	private int begin;
-
-	/**
-	 * @Description: end : 子数组的结束位置
-	 */
-	private int end;
-
-	public int getBegin() {
-		return begin;
+	public static int minSubArray(int arr[]) {
+		int n = arr.length;
+		int nAll = arr[0];// 有n个数字数组的最小子数组的和
+		int nEnd = arr[0];// 有n个数字数组包含最后一个元素的子数组的最小和
+		for (int i = 1; i < n; i++) {
+			nEnd = min(nEnd + arr[i], arr[i]);
+			nAll = min(nEnd, nAll);
+		}
+		return nAll;
 	}
 
-	public void setBegin(int begin) {
-		this.begin = begin;
+	private static int max(int a, int b) {
+		return a > b ? a : b;
 	}
 
-	public int getEnd() {
-		return end;
-	}
-
-	public void setEnd(int end) {
-		this.end = end;
+	private static int min(int a, int b) {
+		return a < b ? a : b;
 	}
 
 	/**
@@ -98,8 +114,21 @@ public class ArrayDemo {
 	 * @param arr
 	 * @param k
 	 */
-	public static void shiftK(int arr[], int k) {
+	public static int[] shiftK(int arr[], int k) {
+		int n = arr.length;
+		k = k % n;// 防止k > n，右移k位与k%n是一样的
+		reverse(arr, n - k, n - 1);
+		reverse(arr, 0, n - k - 1);
+		reverse(arr, 0, n - 1);
+		return arr;
+	}
 
+	private static void reverse(int[] arr, int b, int e) {
+		for (; b < e; b++, e--) {
+			int temp = arr[e];
+			arr[e] = arr[b];
+			arr[b] = temp;
+		}
 	}
 
 	/**
@@ -176,11 +205,6 @@ public class ArrayDemo {
 	public static int maxNum(int arr[], int begin) {
 
 		return 1;
-	}
-
-	@SuppressWarnings("unused")
-	private static int max(int a, int b) {
-		return a > b ? a : b;
 	}
 
 	/**
