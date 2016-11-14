@@ -16,9 +16,28 @@ public class GetPostOrder {
 	}
 
 	private Node initTree(int[] preOrder, int preStart, int preEnd, int[] inOrder, int inStart, int inEnd) {
-		Node root = null;
-
+		if(preStart > preEnd || inStart > inEnd) {
+			return null;
+		}
+		int rdata = preOrder[preStart];
+		Node root = new Node(rdata);
+		int pos = findIndex(inOrder, rdata, inStart, inEnd);
+		//构建左子树
+		Node left = initTree(preOrder,preStart+1,preStart+pos-inStart,inOrder,inStart,pos-1);
+		//构建右子树
+		Node right = initTree(preOrder,preStart+pos-inStart+1,preEnd,inOrder,pos+1,inEnd);
+		root.left = left;
+		root.right = right;
 		return root;
+	}
+
+	private int findIndex(int a[], int data, int start, int end) {
+		for(int i = start; i <= end; i++) {
+			if(a[i] == data) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	private void postOrder(Node root) {
@@ -28,5 +47,4 @@ public class GetPostOrder {
 			System.out.println(root.data);
 		}
 	}
-
 }
